@@ -64,7 +64,7 @@ static const char *upvol[]   = { "amixer", "set", "Master", "5%+", NULL };
 static const char *downvol[] = { "amixer", "set", "Master", "5%-", NULL };
 
 static const char *playnext[] =    { "playerctl", "next", NULL };
-static const char *toggletrack[] = { "playerctl", "pause", NULL };
+static const char *toggletrack[] = { "playerctl", "play-pause", NULL };
 static const char *playprev[] =    { "playerctl", "previous", NULL };
 
 static Key keys[] = {
