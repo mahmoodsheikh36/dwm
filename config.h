@@ -13,11 +13,24 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, "#142138", col_gray2 },
-	[SchemeSel]  = { col_gray4, "#2c497a",  col_cyan  },
+// static const char *colors[][3]      = {
+// 	/*               fg         bg         border   */
+// 	[SchemeNorm] = { col_gray3, "#142138", col_gray2 },
+// 	[SchemeSel]  = { col_gray4, "#2c497a",  col_cyan  },
+// };
+
+
+#define NUMCOLORS         4
+#define MAXCOLORS         3
+static const char *colors[NUMCOLORS][MAXCOLORS] = {
+	// border   foreground background
+	{ "#000033", "#dddddd", "#000033" },  // normal
+	{ "#000088", "#ffffff", "#000088" },  // selected
+	{ "#ff0000", "#000000", "#ffff00" },  // urgent/warning  (black on yellow)
+	{ "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
+	// add more here
 };
+
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4" };
