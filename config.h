@@ -13,27 +13,34 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-// static const char *colors[][3]      = {
-// 	/*               fg         bg         border   */
-// 	[SchemeNorm] = { col_gray3, "#142138", col_gray2 },
-// 	[SchemeSel]  = { col_gray4, "#2c497a",  col_cyan  },
-// };
-
-
-#define NUMCOLORS         4
-#define MAXCOLORS         3
-static const char *colors[NUMCOLORS][MAXCOLORS] = {
-	// border   foreground background
-	{ "#000033", "#dddddd", "#000033" },  // normal
-	{ "#000088", "#ffffff", "#000088" },  // selected
-	{ "#ff0000", "#000000", "#ffff00" },  // urgent/warning  (black on yellow)
-	{ "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
-	// add more here
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_gray3, "#142138", "#000000" },
+	[SchemeSel]  = { col_gray4, "#2c497a",  "#ff00f3"  },
 };
 
+/*
+#define NUMCOLORS         11
+#define MAXCOLORS         3
+static const char *colors[NUMCOLORS][MAXCOLORS] = {
+	// fg        bg          border
+	{ "#000900", "#142138", "#2c497a" },  // normal
+	{ "#000058", "#2c497a", "#ff0013" },  // selected
+	{ "#ff0000", "#000000", "#ffff00" },  // urgent/warning  (black on yellow)
+	{ "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
+	{ "#13cc11", "#142138", "#ff0000" },  // 5  - spotify color (green)
+	{ "#7c0e6f", "#142138", "#ff0000" },  // 6  - purplish
+	{ "#8e050a", "#142138", "#ff0000" },  // 7  - redish
+	{ "#a39d03", "#142138", "#ff0000" },  // 8  - yellowish
+	{ "#092ae5", "#142138", "#ff0000" },  // 9  - blue
+	{ "#0d0f0f", "#142138", "#ff0000" },  // 10 - grayish/blackish
+	{ "#000000", "#142138", "#ff0000" },  // 11 - black
+	// add more here
+};
+*/
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
 
 static const Rule rules[] = {
 	/* xprop(1):
