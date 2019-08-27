@@ -6,8 +6,8 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "terminus:size=10", "FontAwesome:size=12" };
-static const char dmenufont[]       = "Source Code Pro:size=10";
+static const char *fonts[]          = { "MerriweatherSans:size=11" };
+static const char dmenufont[]       = "MerriweatherSans:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -89,11 +89,11 @@ static const char *playprev[] =    { "playerctl", "previous", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-  { 0,         XF86XK_AudioLowerVolume,      spawn,          {.v = downvol } },
-  { 0,         XF86XK_AudioRaiseVolume,      spawn,          {.v = upvol } },
-  { 0,                XF86XK_AudioPrev,      spawn,          {.v = playprev } },
-  { 0,                XF86XK_AudioNext,      spawn,          {.v = playnext } },
-  { 0,                XF86XK_AudioPlay,      spawn,          {.v = toggletrack } },
+    { 0,         XF86XK_AudioLowerVolume,      spawn,          {.v = downvol } },
+    { 0,         XF86XK_AudioRaiseVolume,      spawn,          {.v = upvol } },
+    { 0,                XF86XK_AudioPrev,      spawn,          {.v = playprev } },
+    { 0,                XF86XK_AudioNext,      spawn,          {.v = playnext } },
+    { 0,                XF86XK_AudioPlay,      spawn,          {.v = toggletrack } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
