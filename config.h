@@ -7,6 +7,7 @@ static const unsigned int gappx     = 12;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const double defaultopacity  = 1;
 static const char *fonts[]          = { "MerriweatherSans:size=11" };
 static const char dmenufont[]       = "MerriweatherSans:size=11";
 static const char col_gray1[]       = "#222222";
@@ -16,8 +17,8 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, "#142138", "#000000" },
-	[SchemeSel]  = { col_gray4, "#2c497a",  "#ff00f3"  },
+	/* [SchemeNorm] = */ { col_gray3, "#631937", "#000000" },
+	/* [SchemeSel]  = */ { col_gray4, "#8c4663",  "#ff00f3"  },
 };
 
 /*
@@ -50,7 +51,10 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Chromium", NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Spotify",  NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 },
+	/* { "st",       NULL,       NULL,       1 << 3,       0,           -1 }, */
 };
 
 /* layout(s) */
@@ -78,8 +82,9 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "termite", NULL };
+static const char *dmenucmd[]     = { "dmenu_run", NULL };
+static const char *termcmd[]      = { "st", NULL };
+static const char *dmenuScriptCmd[] = { "dmenu.sh", NULL };
 
 static const char *upvol[]   = { "amixer", "set", "Master", "5%+", NULL };
 static const char *downvol[] = { "amixer", "set", "Master", "5%-", NULL };
@@ -97,6 +102,10 @@ static Key keys[] = {
     { 0,                XF86XK_AudioPlay,      spawn,          {.v = toggletrack } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_x,      spawn,          {.v = dmenuScriptCmd } },
+ 	{ MODKEY|ShiftMask,		        XK_s,	   spawn,	   SHCMD("transset-df -a --dec .1") },
+ 	{ MODKEY|ShiftMask,		        XK_d,	   spawn,	   SHCMD("transset-df -a --inc .1") },
+ 	{ MODKEY|ShiftMask,		        XK_f,	   spawn,	   SHCMD("transset-df -a .75") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
