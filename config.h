@@ -7,12 +7,12 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 12;        /* gaps between windows */
+static const unsigned int gappx     = 8;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const double defaultopacity  = 1;
-static const char *fonts[]          = { "MerriweatherSans:size=11" };
+static const char *fonts[]          = { "Ubuntu:size=11" };
 static const char dmenufont[]       = "MerriweatherSans:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -20,8 +20,8 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
-	[SchemeNorm] = { col_gray3, "#002e0d", "#000000" },
-	[SchemeSel]  = { col_gray4, "#1a3d24",  "#0cc941"  },
+	[SchemeNorm] = { col_gray3, "#121413", "#121413" },
+	[SchemeSel]  = { col_gray4, "#322222",  "#322222"  },
 };
 
 /*
@@ -45,7 +45,7 @@ static const char *colors[NUMCOLORS][MAXCOLORS] = {
 */
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5" };
+static const char *tags[] = { "code", "music", "web", "etc", "etc" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -53,8 +53,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Chromium", NULL,       NULL,       1 << 2,       0,           -1 },
+     { "Gimp",     NULL,       NULL,       0,            1,           -1 }, 
+	/* { "Chromium", NULL,       NULL,       1 << 2,       0,           -1 }, */
 	/* { "Spotify",  NULL,       NULL,       1 << 1,       0,           -1 }, */
 	/* { "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 }, */
 	/* { "st",       NULL,       NULL,       1 << 3,       0,           -1 }, */
@@ -98,25 +98,25 @@ static const char *playprev[] =    { "playerctl", "previous", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-    { 0,         XF86XK_AudioLowerVolume,      spawn,          {.v = downvol } },
-    { 0,         XF86XK_AudioRaiseVolume,      spawn,          {.v = upvol } },
-    { 0,                XF86XK_AudioPrev,      spawn,          {.v = playprev } },
-    { 0,                XF86XK_AudioNext,      spawn,          {.v = playnext } },
-    { 0,                XF86XK_AudioPlay,      spawn,          {.v = toggletrack } },
-	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+    /* { 0,         XF86XK_AudioLowerVolume,      spawn,          {.v = downvol } }, */
+    /* { 0,         XF86XK_AudioRaiseVolume,      spawn,          {.v = upvol } }, */
+    /* { 0,                XF86XK_AudioPrev,      spawn,          {.v = playprev } }, */
+    /* { 0,                XF86XK_AudioNext,      spawn,          {.v = playnext } }, */
+    /* { 0,                XF86XK_AudioPlay,      spawn,          {.v = toggletrack } }, */
+	/* { MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } }, */
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_x,      spawn,          {.v = dmenuScriptCmd } },
- 	{ MODKEY|ShiftMask,		        XK_s,	   spawn,	   SHCMD("transset-df -a --dec .1") },
- 	{ MODKEY|ShiftMask,		        XK_d,	   spawn,	   SHCMD("transset-df -a --inc .1") },
- 	{ MODKEY|ShiftMask,		        XK_f,	   spawn,	   SHCMD("transset-df -a .75") },
+ 	/* { MODKEY|ShiftMask,		        XK_s,	   spawn,	   SHCMD("transset-df -a --dec .1") }, */
+ 	/* { MODKEY|ShiftMask,		        XK_d,	   spawn,	   SHCMD("transset-df -a --inc .1") }, */
+ 	/* { MODKEY|ShiftMask,		        XK_f,	   spawn,	   SHCMD("transset-df -a .75") }, */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_u,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_z, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
