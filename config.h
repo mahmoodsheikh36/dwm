@@ -45,7 +45,7 @@ static const char *colors[NUMCOLORS][MAXCOLORS] = {
 */
 
 /* tagging */
-static const char *tags[] = { "code", "music", "web", "etc", "etc" };
+static const char *tags[] = { "code", "music", "web", "term", "etc", "etc" };
 
 static const Rule rules[] = {
 	/* xprop(1):
