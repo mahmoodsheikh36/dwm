@@ -1,12 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
+#include "/home/mahmooz/.cache/wal/colors-wal-dwm.h"
 
 /* appearance */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -19,30 +20,11 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-};
-/*
-#define NUMCOLORS         11
-#define MAXCOLORS         3
-static const char *colors[NUMCOLORS][MAXCOLORS] = {
-	// fg        bg          border
-	{ "#000900", "#142138", "#2c497a" },  // normal
-	{ "#000058", "#2c497a", "#ff0013" },  // selected
-	{ "#ff0000", "#000000", "#ffff00" },  // urgent/warning  (black on yellow)
-	{ "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
-	{ "#13cc11", "#142138", "#ff0000" },  // 5  - spotify color (green)
-	{ "#7c0e6f", "#142138", "#ff0000" },  // 6  - purplish
-	{ "#8e050a", "#142138", "#ff0000" },  // 7  - redish
-	{ "#a39d03", "#142138", "#ff0000" },  // 8  - yellowish
-	{ "#092ae5", "#142138", "#ff0000" },  // 9  - blue
-	{ "#0d0f0f", "#142138", "#ff0000" },  // 10 - grayish/blackish
-	{ "#000000", "#142138", "#ff0000" },  // 11 - black
-	// add more here
-};
-*/
+//static const char *colors[][3]      = {
+	//[>               fg         bg         border   <]
+	//[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	//[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+//};
 
 /* tagging */
 static const char *tags[] = { "code", "music", "web", "term", "etc", "etc" };
