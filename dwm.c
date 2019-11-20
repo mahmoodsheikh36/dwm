@@ -471,19 +471,21 @@ buttonpress(XEvent *e)
         focus(NULL);
     }
     if (ev->window == selmon->barwin) {
-        i = x = 0;
-        do
-            x += TEXTW(tags[i]);
-        while (ev->x >= x && ++i < LENGTH(tags));
-        if (i < LENGTH(tags)) {
-            click = ClkTagBar;
-            arg.ui = 1 << i;
-        } else if (ev->x < x + blw)
-            click = ClkLtSymbol;
-        else if (ev->x > selmon->ww - TEXTW(stext) - getsystraywidth())
-            click = ClkStatusText;
-        else
-            click = ClkWinTitle;
+        if (selmon == mons) { /* only primary monitor has tags */
+            i = x = 0;
+            do
+                x += TEXTW(tags[i]);
+            while (ev->x >= x && ++i < LENGTH(tags));
+            if (i < LENGTH(tags)) {
+                click = ClkTagBar;
+                arg.ui = 1 << i;
+            } else if (ev->x < x + blw)
+                click = ClkLtSymbol;
+            else if (ev->x > selmon->ww - TEXTW(stext) - getsystraywidth())
+                click = ClkStatusText;
+            else
+                click = ClkWinTitle;
+        }
     } else if ((c = wintoclient(ev->window))) {
         focus(c);
         restack(selmon);
@@ -722,6 +724,8 @@ createmon(void)
 {
     Monitor *m;
 
+    if (!mons) {
+    }
     m = ecalloc(1, sizeof(Monitor));
     m->tagset[0] = m->tagset[1] = 1;
     m->mfact = mfact;
@@ -818,7 +822,7 @@ drawbar(Monitor *m)
             urg |= c->tags;
     }
     x = 0;
-    for (i = 0; i < LENGTH(tags); i++) {
+    for (i = 0; i < (m == mons ? LENGTH(tags) : 1); i++) {
         w = TEXTW(tags[i]);
         drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
         drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
@@ -1885,6 +1889,9 @@ tag(const Arg *arg)
 {
     if (selmon->sel && arg->ui & TAGMASK) {
         selmon->sel->tags = arg->ui & TAGMASK;
+        /* switch the window to primary monitor
+         * because it is the only monitor that has tags */
+        selmon->sel->mon = mons;
         focus(NULL);
         arrange(selmon);
     }
@@ -2403,6 +2410,12 @@ view(const Arg *arg)
 {
     if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
         return;
+
+    /* switch focus to primary monitor */
+    unfocus(selmon->sel, 0);
+    selmon = mons;
+    focus(NULL);
+
     selmon->seltags ^= 1; /* toggle sel tagset */
     if (arg->ui & TAGMASK)
         selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
