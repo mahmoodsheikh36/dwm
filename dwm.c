@@ -195,6 +195,7 @@ static void opacity(Client *c, double opacity);
 static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
+static void focusmon_noarg(Monitor *mon);
 static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
@@ -951,6 +952,16 @@ focusmon(const Arg *arg)
         return;
     unfocus(selmon->sel, 0);
     selmon = m;
+    focus(NULL);
+}
+
+void
+focusmon_noarg(Monitor *mon)
+{
+    if (!mons->next || mon == selmon)
+        return;
+    unfocus(selmon->sel, 0);
+    selmon = mon;
     focus(NULL);
 }
 
@@ -1889,11 +1900,10 @@ tag(const Arg *arg)
 {
     if (selmon->sel && arg->ui & TAGMASK) {
         selmon->sel->tags = arg->ui & TAGMASK;
-        /* switch the window to primary monitor
+        /* send the window to primary monitor
          * because it is the only monitor that has tags */
-        selmon->sel->mon = mons;
-        focus(NULL);
-        arrange(selmon);
+        sendmon(selmon->sel, mons);
+        focusmon_noarg(mons);
     }
 }
 
@@ -1975,18 +1985,17 @@ toggletag(const Arg *arg)
     newtags = selmon->sel->tags ^ (arg->ui & TAGMASK);
     if (newtags) {
         selmon->sel->tags = newtags;
-        focus(NULL);
-        arrange(selmon);
+        focusmon_noarg(mons);
     }
 }
 
 void
 toggleview(const Arg *arg)
 {
-    unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
+    unsigned int newtagset = mons->tagset[mons->seltags] ^ (arg->ui & TAGMASK);
 
     if (newtagset) {
-        selmon->tagset[selmon->seltags] = newtagset;
+        mons->tagset[mons->seltags] = newtagset;
         focus(NULL);
         arrange(selmon);
     }
@@ -2412,9 +2421,7 @@ view(const Arg *arg)
         return;
 
     /* switch focus to primary monitor */
-    unfocus(selmon->sel, 0);
-    selmon = mons;
-    focus(NULL);
+    focusmon_noarg(mons);
 
     selmon->seltags ^= 1; /* toggle sel tagset */
     if (arg->ui & TAGMASK)
