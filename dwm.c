@@ -1904,6 +1904,8 @@ tag(const Arg *arg)
          * because it is the only monitor that has tags */
         sendmon(selmon->sel, mons);
         focusmon_noarg(mons);
+        arrange(mons);
+        focus(NULL);
     }
 }
 
