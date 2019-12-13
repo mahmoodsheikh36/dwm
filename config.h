@@ -1,6 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
-#include "/home/mahmooz/.cache/wal/colors-wal-dwm.h"
 
 /* appearance */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -8,7 +7,7 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
+static const unsigned int gappx     = 1;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -20,11 +19,11 @@ static const char dmenufont[]       = "MerriweatherSans:size=11";
 // static const char col_gray3[]       = "#bbbbbb";
 // static const char col_gray4[]       = "#eeeeee";
 // static const char col_cyan[]        = "#005577";
-//static const char *colors[][3]      = {
-	//[>               fg         bg         border   <]
-	//[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	//[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-//};
+static const char *colors[][3]      = {
+    //[>               fg         bg         border   <]
+    [SchemeNorm] = { "#ffffff", "#000000", "#444444" },
+    [SchemeSel]  = { "#ffffff", "#555555",  "#440000" },
+};
 
 /* tagging */
 static const char *tags[] = { "code", "music", "web", "term", "etc", "etc" };
@@ -34,8 +33,8 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-     { "Gimp",     NULL,       NULL,       0,            1,           -1 }, 
+	/* class      instance    title       tags mask     isfloating   monitor  */
+    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	/* { "Chromium", NULL,       NULL,       1 << 2,       0,           -1 }, */
 	/* { "Spotify",  NULL,       NULL,       1 << 1,       0,           -1 }, */
 	/* { "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 }, */
@@ -137,4 +136,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
