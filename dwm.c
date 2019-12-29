@@ -276,6 +276,9 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 
+/* automatically center the window if it is floating */
+static void center_if_floating(Client *c);
+
 /* variables */
 static Systray *systray =  NULL;
 static const char broken[] = "broken";
@@ -362,6 +365,21 @@ applyrules(Client *c)
     if (ch.res_name)
         XFree(ch.res_name);
     c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
+}
+
+void
+center_if_floating(Client *c)
+{
+    int mx = c->mon->mx;
+    int my = c->mon->my;
+    int mw = c->mon->mw;
+    int mh = c->mon->mh;
+    int w = c->w;
+    int h = c->h;
+    if (c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
+        c->x = (mx + mw) / 2 - w / 2;
+        c->y = (my + mh) / 2 - h / 2;
+    }
 }
 
 int
@@ -1254,6 +1272,7 @@ manage(Window w, XWindowAttributes *wa)
         (unsigned char *) &(c->win), 1);
     XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
     setclientstate(c, NormalState);
+    center_if_floating(c);
     if (c->mon == selmon)
         unfocus(selmon->sel, 0);
     c->mon->sel = c;
