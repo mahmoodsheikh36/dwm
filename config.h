@@ -6,7 +6,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 1;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -22,11 +22,11 @@ static const char dmenufont[]       = "MerriweatherSans:size=11";
 static const char *colors[][3]      = {
     //[>               fg         bg         border   <]
     [SchemeNorm] = { "#ffffff", "#000000", "#444444" },
-    [SchemeSel]  = { "#ffffff", "#555555",  "#440000" },
+    [SchemeSel]  = { "#ffffff", "#555555",  "#00ff00" },
 };
 
 /* tagging */
-static const char *tags[] = { "code", "music", "web", "term", "etc", "etc" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -79,7 +79,7 @@ static const char *playprev[] =    { "playerctl", "previous", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	//{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_x,      spawn,          {.v = dmenuScriptCmd } },
  	/* { MODKEY|ShiftMask,		        XK_s,	   spawn,	   SHCMD("transset-df -a --dec .1") }, */
  	/* { MODKEY|ShiftMask,		        XK_d,	   spawn,	   SHCMD("transset-df -a --inc .1") }, */
