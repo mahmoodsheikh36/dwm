@@ -8,21 +8,16 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 1;        /* gaps between windows */
+static const unsigned int bottomgappx = 1;
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const double defaultopacity  = 1;
-static const char *fonts[]          = { "Source Code Pro:size=13:antialias=true:autohint=true" };
-static const char dmenufont[]       = "MerriweatherSans:size=11";
-// static const char col_gray1[]       = "#222222";
-// static const char col_gray2[]       = "#444444";
-// static const char col_gray3[]       = "#bbbbbb";
-// static const char col_gray4[]       = "#eeeeee";
-// static const char col_cyan[]        = "#005577";
+static const char *fonts[]          = { "Hack:size=13:antialias=true:autohint=true" };
 static const char *colors[][3]      = {
     //[>               fg         bg         border   <]
     [SchemeNorm] = { "#ffffff", "#000000", "#444444" },
-    [SchemeSel]  = { "#ffffff", "#555555",  "#00ff00" },
+    [SchemeSel]  = { "#ffffff", "#555555", "#ffffff" },
 };
 
 /* tagging */
@@ -64,23 +59,9 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]     = { "dmenu_run", "-l", "15", NULL };
-static const char *termcmd[]      = { "st", NULL };
-static const char *dmenuScriptCmd[] = { "dmenu.sh", NULL };
-
-static const char *upvol[]   = { "amixer", "set", "Master", "5%+", NULL };
-static const char *downvol[] = { "amixer", "set", "Master", "5%-", NULL };
-
-static const char *playnext[] =    { "playerctl", "next", NULL };
-static const char *toggletrack[] = { "playerctl", "play-pause", NULL };
-static const char *playprev[] =    { "playerctl", "previous", NULL };
-
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	//{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_x,      spawn,          {.v = dmenuScriptCmd } },
  	/* { MODKEY|ShiftMask,		        XK_s,	   spawn,	   SHCMD("transset-df -a --dec .1") }, */
  	/* { MODKEY|ShiftMask,		        XK_d,	   spawn,	   SHCMD("transset-df -a --inc .1") }, */
  	/* { MODKEY|ShiftMask,		        XK_f,	   spawn,	   SHCMD("transset-df -a .75") }, */
@@ -127,7 +108,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	/* { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } }, */
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
